@@ -1,52 +1,57 @@
-/* Базовые стили для мобильного вида */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f7f6;
+    background: linear-gradient(135deg, #f06, #f79); /* Яркий фон */
     color: #333;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .container {
     width: 100%;
-    max-width: 400px; /* Ограничение ширины для мобильного вида */
+    max-width: 400px; 
     background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
-/* --- Стили Секции Рулетки --- */
+/* --- Секция Рулетки --- */
 .spinner-area {
     position: relative;
     width: 300px;
     height: 300px;
     margin: 0 auto 30px;
     border-radius: 50%;
-    box-shadow: 0 0 0 5px #ccc;
+    background-color: #eee; /* Фон под рулеткой */
+    box-shadow: 0 0 0 8px #fff, 0 0 0 10px #6c5ce7; /* Двойная обводка */
 }
 
 #wheelCanvas {
     display: block;
     border-radius: 50%;
+    transform: rotate(0deg); /* Начальное состояние */
+    transition: transform 0s; /* Отключаем переход при старте для моментального сброса */
 }
 
 /* Стрелка-указатель */
 .pointer {
     position: absolute;
-    top: -15px; /* Размещение над кругом */
+    top: -20px; 
     left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 25px solid #e74c3c; /* Красный цвет */
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid #ff4757; /* Ярко-красная */
     z-index: 100;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
 }
 
 /* Дисплей результата в центре */
@@ -58,121 +63,166 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: center;
+    background: rgba(108, 92, 231, 0.9); /* Полупрозрачный фиолетовый */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 50;
-    pointer-events: none; /* Чтобы не мешать кликать по кнопке */
-}
-
-#winnerName {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #2c3e50;
+    min-width: 150px;
+    pointer-events: none;
     transition: all 0.3s ease;
 }
 
 #winnerTitle {
-    font-size: 0.9em;
-    color: #7f8c8d;
-    margin-top: 5px;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
-/* --- Стили Кнопок и Полей --- */
+#winnerInfo {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffeaa7; /* Ярко-желтый */
+}
+
+/* --- Кнопки и Поля --- */
 .spin-button {
     display: block;
     width: 100%;
-    padding: 15px;
-    font-size: 1.2em;
+    padding: 18px;
+    font-size: 1.4em;
     font-weight: bold;
     color: #fff;
-    background-color: #3498db;
+    background-color: #00b894; /* Ярко-зеленый */
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 20px;
-    box-shadow: 0 3px 0 #2980b9;
-    transition: background-color 0.2s;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 0 #00977a;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 1px;
 }
 
 .spin-button:hover:not(:disabled) {
-    background-color: #2980b9;
+    background-color: #00977a;
 }
 
 .spin-button:active:not(:disabled) {
     box-shadow: none;
-    transform: translateY(3px);
+    transform: translateY(5px);
 }
 
 .spin-button:disabled {
-    background-color: #bdc3c7;
+    background-color: #dfe6e9;
+    color: #b2bec3;
     cursor: not-allowed;
-    box-shadow: 0 3px 0 #95a5a6;
+    box-shadow: 0 5px 0 #a2b0b7;
+}
+
+hr {
+    border: none;
+    border-top: 1px dashed #ced6e0;
+    margin: 30px 0;
 }
 
 .controls-section {
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 #playerInput {
     flex-grow: 1;
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
+    padding: 12px;
+    font-size: 1.1em;
+    border: 1px solid #c9d2da;
+    border-radius: 8px 0 0 8px;
+    outline: none;
 }
 
 .add-button {
-    padding: 10px 15px;
-    font-size: 1em;
-    background-color: #2ecc71;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    background-color: #6c5ce7; /* Фиолетовый */
     color: white;
     border: none;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 8px 8px 0;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+.add-button:hover {
+    background-color: #5d4cd9;
 }
 
 .reset-button {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin-top: 15px;
+    padding: 12px;
+    margin-top: 20px;
     font-size: 1em;
-    color: #e74c3c;
+    color: #ff4757;
     background: #ffebe8;
-    border: 1px solid #e74c3c;
-    border-radius: 5px;
+    border: 1px solid #ff4757;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+.reset-button:hover {
+    background-color: #ff4757;
+    color: white;
 }
 
 /* --- Стили Списка Игроков --- */
 .player-list-title {
     margin-top: 0;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
+    border-bottom: 2px solid #dfe6e9;
+    padding-bottom: 10px;
+    color: #4a69bd;
+    font-size: 1.3em;
 }
 
 .player-list {
     list-style: none;
     padding: 0;
+    max-height: 200px; /* Ограничение высоты, чтобы список не был слишком длинным */
+    overflow-y: auto; /* Прокрутка при переполнении */
 }
 
 .player-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    margin-bottom: 5px;
-    background: #ecf0f1;
-    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background: #f8f8f8;
+    border-radius: 8px;
     font-size: 1.1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.player-number {
+    font-weight: bold;
+    color: #6c5ce7; /* Фиолетовый */
+    margin-right: 10px;
+}
+
+.player-name {
+    flex-grow: 1;
+    text-align: left;
 }
 
 .delete-button {
     background: none;
     border: none;
-    color: #e74c3c;
+    color: #ff4757; /* Красный */
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.5em;
     cursor: pointer;
-    padding: 5px;
+    padding: 0 8px;
+    transition: transform 0.2s;
+}
+.delete-button:hover {
+    transform: scale(1.1);
 }
